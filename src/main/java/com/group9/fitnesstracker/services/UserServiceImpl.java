@@ -5,6 +5,7 @@ import com.group9.fitnesstracker.entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * UserService Implementation
@@ -24,6 +25,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.getAllUsers();
     }
 }
