@@ -17,6 +17,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         //Added this to access root page without needing security
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/user/getUsers").permitAll()
+                        .requestMatchers("/workout/*").permitAll()
+                        .requestMatchers("/exercise/*").permitAll()
+                        .requestMatchers("/workout_exercises/*/exercises").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2

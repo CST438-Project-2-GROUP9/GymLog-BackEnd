@@ -9,35 +9,32 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "workouts")
+@Table(name = "workout")
 public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Column(name = "workout_id")
+    private Long id;
 
-    //replace 
-    @Column(nullable = false)
-    private String ownerId;
+    @Column(name = "user_id",nullable = false)
+    private Long ownerId;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    
-    @Column(nullable = false, updatable = false)
-    private Instant createdAt = Instant.now();
 
     public Workout() {
     }
-    public Workout(String ownerId, String name) {
+    public Workout(Long ownerId, String name) {
         this.ownerId = ownerId;
         this.name = name;
     }
     public Long getId() {
         return id;
     }
-    public String getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
     public String getName() {

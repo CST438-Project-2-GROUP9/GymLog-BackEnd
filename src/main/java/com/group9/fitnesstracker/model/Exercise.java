@@ -6,19 +6,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 @Entity
-@Table(name = "exercises")
+@Table(name = "exercise")
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exercise_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(length = 2000)
+    @Column(name = "description", length = 2000)
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "body_region", nullable = false)
     private String muscleGroup;
 
     public Exercise() {
@@ -50,5 +51,5 @@ public class Exercise {
         this.muscleGroup = muscleGroup;
     }
 
-    
+
 }

@@ -23,15 +23,15 @@ public class User {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "role", nullable = false)
-    private String role;
+    @Column(name = "is_admin", nullable = false)
+    private boolean is_admin;
 
     public User() {
     }
 
-    public User(String username, String role) {
+    public User(String username, boolean is_admin) {
         this.username = username;
-        this.role = role;
+        this.is_admin = is_admin;
     }
 
     public Long getId() {
@@ -46,11 +46,11 @@ public class User {
         this.username = username;
     }
 
-    public String getRole() {
-        return role;
+    public boolean getIsAdmin() {
+        return is_admin;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setIsAdmin(boolean is_admin) {
+        this.is_admin = is_admin;
     }
 }
