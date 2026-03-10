@@ -31,6 +31,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
+<<<<<<< Updated upstream
+=======
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	
+>>>>>>> Stashed changes
 
 }
 
