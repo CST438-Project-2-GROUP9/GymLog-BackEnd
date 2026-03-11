@@ -21,7 +21,7 @@ public class Exercise {
     @Column(name = "description", length = 2000)
     private String description;
 
-        @Column(name = "body_region", nullable = false)
+    @Column(name = "body_region", nullable = false)
     private String bodyRegion;
 
     public Exercise() {
