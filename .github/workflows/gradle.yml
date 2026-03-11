@@ -1,0 +1,46 @@
+# The display name of the workflow in GitHub Actions
+name: JUnit Test
+
+# Trigger this workflow every time a commit is pushed to main or a pull request to main
+on:
+  push:
+    branches: ["main"]         # Only trigger on main branch
+  pull_request:
+    branches: ["main"]         # Trigger for PRs targeting main
+
+jobs:
+  # Name of the job
+  build:
+    # Use the latest Ubuntu virtual machine for running the job
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Get the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4  # This downloads your repository onto the runner
+
+      # Step 2: Install Java 21
+      - name: Set up Java 21
+        # Sets up the specified Java version
+        uses: actions/setup-java@v4
+        with:
+          # Use Eclipse Temurin distribution of Java
+          distribution: 'temurin'
+          # Install Java version 21
+          java-version: '21'
+
+      # Step 3: Setup Gradle
+      - name: Setup Gradle
+        # Configures Gradle on the runner for project
+        uses: gradle/actions/setup-gradle@v3
+
+      # Step 4: Make Gradle Wrapper executable
+      - name: Make Gradle Wrapper Executable
+        # Gives permission so the Gradle wrapper script can run on Linux,
+        # this chmod means change mode (change file permission). +x means add executable permission
+        run: chmod +x ./gradlew
+
+      # Step 5: Run JUnit tests
+      - name: Run tests
+        # Executes Gradle to run all JUnit tests in project
+        run: ./gradlew test
