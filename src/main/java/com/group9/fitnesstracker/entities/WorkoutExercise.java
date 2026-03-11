@@ -22,10 +22,10 @@ public class WorkoutExercise {
     private Long id;
 
     @Column(name = "workout_id", nullable = false)
-    private Workout workout;
+    private Long workoutId;
 
     @Column(name = "exercise_id", nullable = false)
-    private Exercise exercise;
+    private Long exerciseId;
 
     @Column(name = "sets")
     private Integer sets;
@@ -36,9 +36,9 @@ public class WorkoutExercise {
     public WorkoutExercise() {
     }
 
-    public WorkoutExercise(Workout workout, Exercise exercise, Integer sets, Integer reps) {
-        this.workout = workout;
-        this.exercise = exercise;
+    public WorkoutExercise(Long workoutId, Long exerciseId, Integer sets, Integer reps) {
+        this.workoutId = workoutId;
+        this.exerciseId = exerciseId;
         this.sets = sets;
         this.reps = reps;
     }
@@ -47,20 +47,20 @@ public class WorkoutExercise {
         return id;
     }
 
-    public Workout getWorkout() {
-        return workout;
+    public Long getWorkoutId() {
+        return workoutId;
     }
 
-    public void setWorkout(Workout workout) {
-        this.workout = workout;
+    public void setWorkoutId(Long workoutId) {
+        this.workoutId = workoutId;
     }
 
-    public Exercise getExercise() {
-        return exercise;
+    public Long getExerciseId() {
+        return exerciseId;
     }
 
-    public void setExercise(Exercise exercise) {
-        this.exercise = exercise;
+    public void setExerciseId(Long exerciseId) {
+        this.exerciseId = exerciseId;
     }
 
     public Integer getSets() {
