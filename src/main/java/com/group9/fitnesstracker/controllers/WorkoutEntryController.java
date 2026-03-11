@@ -1,18 +1,22 @@
-package com.group9.fitnesstracker.controller;
+package com.group9.fitnesstracker.controllers;
 
 import java.net.URI;
 
+import com.group9.fitnesstracker.services.WorkoutEntryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.group9.fitnesstracker.dto.AddExerciseToWorkoutRequest;
-
 import jakarta.validation.Valid;
 
+@RestController
+@RequestMapping("/api")
 public class WorkoutEntryController {
     private final WorkoutEntryService service;
+
     public WorkoutEntryController(WorkoutEntryService service) {
         this.service = service;
     }

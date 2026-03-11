@@ -1,9 +1,9 @@
-package com.group9.fitnesstracker.controller;
+package com.group9.fitnesstracker.services;
 
 import com.group9.fitnesstracker.dto.AddExerciseToWorkoutRequest;
-import com.group9.fitnesstracker.model.Exercise;
-import com.group9.fitnesstracker.model.Workout;
-import com.group9.fitnesstracker.model.WorkoutExercise;
+import com.group9.fitnesstracker.entities.Exercise;
+import com.group9.fitnesstracker.entities.Workout;
+import com.group9.fitnesstracker.entities.WorkoutExercise;
 import com.group9.fitnesstracker.repository.ExerciseRepository;
 import com.group9.fitnesstracker.repository.WorkoutExerciseRepository;
 import com.group9.fitnesstracker.repository.WorkoutRepository;

@@ -1,4 +1,4 @@
-package com.group9.fitnesstracker.model;
+package com.group9.fitnesstracker.entities;
 import java.time.Instant;
 
 import jakarta.persistence.Column;
@@ -9,40 +9,46 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "workouts")
+@Table(name = "workout")
 public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Column(name = "workout_id")
+    private Long id;
 
-    //replace 
-    @Column(nullable = false)
-    private String ownerId;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
     
-    @Column(nullable = false, updatable = false)
-    private Instant createdAt = Instant.now();
+//    @Column(nullable = false, updatable = false)
+//    private Instant createdAt = Instant.now();
 
     public Workout() {
     }
-    public Workout(String ownerId, String name) {
-        this.ownerId = ownerId;
+
+    public Workout(String userId, String name) {
+        this.userId = userId;
         this.name = name;
     }
+
     public Long getId() {
         return id;
     }
-    public String getOwnerId() {
-        return ownerId;
+
+    public String getUserId() {
+        return userId;
     }
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
