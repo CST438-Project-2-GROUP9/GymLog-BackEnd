@@ -1,53 +1,64 @@
-package com.group9.fitnesstracker.model;
-import jakarta. persistence.Column;
+package com.group9.fitnesstracker.entities;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 @Entity
-@Table(name = "exercises")
+@Table(name = "exercise")
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exercise_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(length = 2000)
+    @Column(name = "description", length = 2000)
     private String description;
 
-    @Column(nullable = false)
-    private String muscleGroup;
+        @Column(name = "body_region", nullable = false)
+    private String bodyRegion;
 
     public Exercise() {
     }
-    public Exercise(String name, String description, String muscleGroup) {
+
+    public Exercise(String name, String description, String bodyRegion) {
         this.name = name;
         this.description = description;
-        this.muscleGroup = muscleGroup;
+        this.bodyRegion = bodyRegion;
     }
+
     public Long getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getMuscleGroup() {
-        return muscleGroup;
+
+    public String getBodyRegion() {
+        return bodyRegion;
     }
-    public void setMuscleGroup(String muscleGroup) {
-        this.muscleGroup = muscleGroup;
+
+    public void setBodyRegion(String bodyRegion) {
+        this.bodyRegion = bodyRegion;
     }
 
     
