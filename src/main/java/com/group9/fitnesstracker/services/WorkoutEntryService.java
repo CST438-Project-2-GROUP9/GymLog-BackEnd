@@ -9,7 +9,9 @@ import com.group9.fitnesstracker.repository.WorkoutExerciseRepository;
 import com.group9.fitnesstracker.repository.WorkoutRepository;
 
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WorkoutEntryService {
     private final WorkoutRepository workoutRepo;
     private final ExerciseRepository exerciseRepo;
@@ -28,7 +30,7 @@ public class WorkoutEntryService {
         Exercise exercise = exerciseRepo.findById(req.getExerciseId())
             .orElseThrow(() -> new RuntimeException("Exercise not found"));
 
-        WorkoutExercise entry = new WorkoutExercise(workout, exercise, req.getSets(), req.getReps());
+        WorkoutExercise entry = new WorkoutExercise(workoutId, exercise.getId(), req.getSets(), req.getReps());
         workoutExerciseRepo.save(entry);
         return entry.getId();
     }
