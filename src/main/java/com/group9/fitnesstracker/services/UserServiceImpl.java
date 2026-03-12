@@ -5,6 +5,7 @@ import com.group9.fitnesstracker.entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * UserService Implementation
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -26,4 +27,23 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
+    @Override
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+    @Override
+    public Optional<User> getUserByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public boolean usernameExists(String username) {
+        return false;
+    }
+
+    @Override
+    public boolean usernameExits(String username){
+        return userRepository.existsByUsername(username);
+    }
+    
 }
