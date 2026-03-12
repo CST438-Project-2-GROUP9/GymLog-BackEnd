@@ -45,5 +45,5 @@ public class UserServiceImpl implements UserService {
     public boolean usernameExits(String username){
         return userRepository.existsByUsername(username);
     }
-
+    
 }
