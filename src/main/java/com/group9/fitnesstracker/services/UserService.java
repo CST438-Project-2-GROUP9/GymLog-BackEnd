@@ -3,6 +3,7 @@ package com.group9.fitnesstracker.services;
 import com.group9.fitnesstracker.entities.User;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User Service Interface
@@ -14,4 +15,9 @@ import java.util.List;
  */
 public interface UserService {
     List<User> getAllUsers();
+    Optional<User> getUserById(Long id);
+    Optional<User> getUserByUsername(String username);
+    boolean usernameExists(String username);
+
+    boolean usernameExits(String username);
 }

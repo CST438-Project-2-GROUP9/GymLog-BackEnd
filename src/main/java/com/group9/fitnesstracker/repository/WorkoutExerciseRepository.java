@@ -7,3 +7,4 @@ import com.group9.fitnesstracker.entities.WorkoutExercise;
 public interface WorkoutExerciseRepository extends JpaRepository<WorkoutExercise, Long> {
     
 }
+

@@ -4,6 +4,7 @@ import com.group9.fitnesstracker.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,20 @@ public class UserController {
     @GetMapping("/getUsers")
     public ResponseEntity<?> getUsers() {
         return new ResponseEntity<>(this.userService.getAllUsers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getUserById/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        return new ResponseEntity<>(this.userService.getUserById(id), HttpStatus.OK);
+    }
+    @GetMapping("/getUserByUsername/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        return new ResponseEntity<>(this.userService.getUserByUsername(username), HttpStatus.OK);
+    }
+    @GetMapping("/usernameExists/{username}")
+    public ResponseEntity<?> getUsernameExist(@PathVariable String username) {
+        boolean exists = this.userService.usernameExists(username);
+        return new ResponseEntity<>(java.util.Map.of("username",username,"exists", exists), HttpStatus.OK);
     }
 
 
