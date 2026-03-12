@@ -10,9 +10,9 @@ import jakarta.persistence.*;
  * @version: 0.2.0
  *
  */
-
+//Must quote user table because it's a keyword in Postgre, if not it will throw error when accessing the table
 @Entity
-@Table(name = "user")
+@Table(name = "\"user\"")
 public class User {
 
     @Id
