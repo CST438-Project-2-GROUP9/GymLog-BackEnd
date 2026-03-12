@@ -11,6 +11,8 @@ import com.group9.fitnesstracker.repository.WorkoutRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WorkoutEntryService {
     private final WorkoutRepository workoutRepo;
@@ -33,5 +35,24 @@ public class WorkoutEntryService {
         WorkoutExercise entry = new WorkoutExercise(workoutId, exercise.getId(), req.getSets(), req.getReps());
         workoutExerciseRepo.save(entry);
         return entry.getId();
+    }
+
+    @Transactional
+    public Long createRandomWorkout(String userId, String bodyRegion) {
+        Workout workout = new Workout(userId, "Random " + bodyRegion + " Workout");
+        workout = workoutRepo.save(workout);
+
+        List<Exercise> randomExercises = exerciseRepo.findRandomExercisesByBodyRegion(bodyRegion, 3);
+
+        if (randomExercises.isEmpty()) {
+            throw new RuntimeException("No exercises found for region: " + bodyRegion);
+        }
+
+        for (Exercise ex : randomExercises) {
+            WorkoutExercise entry = new WorkoutExercise(workout.getId(), ex.getId(), 3, 10);
+            workoutExerciseRepo.save(entry);
+        }
+
+        return workout.getId();
     }
 }
