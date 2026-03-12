@@ -28,11 +28,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/getUsers")
-    public ResponseEntity<?> getUsers() {
-        return new ResponseEntity<>(this.userService.getAllUsers(), HttpStatus.OK);
-    }
-
     @GetMapping("/getUserById/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         return new ResponseEntity<>(this.userService.getUserById(id), HttpStatus.OK);

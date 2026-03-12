@@ -15,13 +15,16 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface  UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
     boolean existsByUsername(String username);
 
     @Query(value = "SELECT * FROM \"user\"", nativeQuery = true)
     List<User> getAllUsers();
+
+    @Query(value = "SELECT * FROM \"user\" WHERE user_id = :id", nativeQuery = true)
+    Optional<User> getUserId(long id);
 }
 
 

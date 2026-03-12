@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+        return userRepository.getUserId(id);
     }
     @Override
     public Optional<User> getUserByUsername(String username){

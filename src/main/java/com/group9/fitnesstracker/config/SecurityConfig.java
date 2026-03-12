@@ -16,14 +16,14 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // allow landing + auth endpoints
-                        .requestMatchers("/", "/error", "/oauth2/**", "/login/**").permitAll()
+//                        .requestMatchers("/", "/error", "/oauth2/**", "/login/**").permitAll()
                         // everything else requires auth (either session login or JWT depending on request)
                         .anyRequest().authenticated()
                 )
                 // enable Google OAuth login (creates session)
-                .oauth2Login(Customizer.withDefaults())
+                .oauth2Login(Customizer.withDefaults());
                 // keep JWT support for endpoints that are called with Authorization: Bearer <token>
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+//                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
 
         return http.build();
     }
