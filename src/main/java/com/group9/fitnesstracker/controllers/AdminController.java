@@ -6,11 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,32 +33,54 @@ public class AdminController {
         // Get the username of the logged in person, and checked if it is in database and check if it's an admin
         String username = authentication.getName();
 
-        System.out.println("Logged in username: " + authentication.getName());
+        // System.out.println("Logged in username: " + authentication.getName());
         Optional<User> user = userService.getUserByUsername(username);
         return user.isPresent() && user.get().getIsAdmin();
     }
 
     /**
      * Gets all users (Admin only)
-     * @return
+     * @return all the users in the database, or an error
      */
     @GetMapping("/users")
-    public ResponseEntity<?> getUsers() {
+    public ResponseEntity<List<User>> getUsers() {
         if (isUserAdmin()) {
             return new ResponseEntity<>(this.userService.getAllUsers(), HttpStatus.OK);
         }
-        // If the current user is not an admin, return HTTP 403 Forbidden with a message
-        return ResponseEntity.status(403).body("Forbidden: Admins only");
+        // If the current user is not an admin, return HTTP 403 Forbidden
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     /**
      * Gets single user (Admin only)
-     * @return
+     * @Param user_id
+     * @return a single User in the database based on the given user_id, or an error
      */
     @GetMapping("/users/{user_id}")
-    public ResponseEntity<?> getUserById(@PathVariable long user_id) {
+    public ResponseEntity<User> getUserById(@PathVariable long user_id) {
         if (isUserAdmin()) {
             return new ResponseEntity<>(this.userService.getUserById(user_id), HttpStatus.OK);
+        }
+        // If the current user is not an admin, return HTTP 403 Forbidden
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    /**
+     * Deletes a User (Admin only)
+     * Deletes a user based on the given user_id in the database
+     * @Param user_id
+     * @return Success message or Fail message
+     */
+    @DeleteMapping("/users/{user_id}")
+    public ResponseEntity<?> deleteUserById(@PathVariable long user_id) {
+        if (isUserAdmin()) {
+            boolean isDeleted = this.userService.deleteUserById(user_id);
+
+            if (isDeleted) {
+                return ResponseEntity.ok("User successfully deleted");
+            } else {
+                return ResponseEntity.status(404).body("User not found");
+            }
         }
         // If the current user is not an admin, return HTTP 403 Forbidden with a message
         return ResponseEntity.status(403).body("Forbidden: Admins only");
