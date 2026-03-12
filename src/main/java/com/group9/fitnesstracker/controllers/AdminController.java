@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,10 +44,23 @@ public class AdminController {
      * Gets all users (Admin only)
      * @return
      */
-    @GetMapping("/getUsers")
+    @GetMapping("/users")
     public ResponseEntity<?> getUsers() {
         if (isUserAdmin()) {
             return new ResponseEntity<>(this.userService.getAllUsers(), HttpStatus.OK);
+        }
+        // If the current user is not an admin, return HTTP 403 Forbidden with a message
+        return ResponseEntity.status(403).body("Forbidden: Admins only");
+    }
+
+    /**
+     * Gets single user (Admin only)
+     * @return
+     */
+    @GetMapping("/users/{user_id}")
+    public ResponseEntity<?> getUserById(@PathVariable long user_id) {
+        if (isUserAdmin()) {
+            return new ResponseEntity<>(this.userService.getUserById(user_id), HttpStatus.OK);
         }
         // If the current user is not an admin, return HTTP 403 Forbidden with a message
         return ResponseEntity.status(403).body("Forbidden: Admins only");
