@@ -8,8 +8,10 @@ package com.group9.fitnesstracker.repository;
  * @version: 0.1.0
  *
  */
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.group9.fitnesstracker.entities.User;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -24,7 +26,12 @@ public interface  UserRepository extends JpaRepository<User, Long> {
     List<User> getAllUsers();
 
     @Query(value = "SELECT * FROM \"user\" WHERE user_id = :id", nativeQuery = true)
-    Optional<User> getUserId(long id);
+    User getUserId(long id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM \"user\" WHERE user_id = :id", nativeQuery = true)
+    int deleteUserById(long id);
 }
 
 

@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.getAllUsers();
     }
     @Override
-    public Optional<User> getUserById(Long id) {
+    public User getUserById(Long id) {
         return userRepository.getUserId(id);
     }
     @Override
@@ -44,6 +44,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean usernameExits(String username){
         return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public boolean deleteUserById(long id) {
+        int deleted = userRepository.deleteUserById(id);
+        // Meaning a row was deleted
+        return deleted > 0;
     }
     
 }
