@@ -48,9 +48,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUserById(long id) {
-        int deleted = userRepository.deleteUserById(id);
         // Meaning a row was deleted
-        return deleted > 0;
+        return userRepository.deleteUserById(id) > 0;
+    }
+
+    @Override
+    public boolean updateUserPrivelege(long id, boolean status) {
+        return userRepository.updateUserPrivelege(id, status);
     }
     
 }

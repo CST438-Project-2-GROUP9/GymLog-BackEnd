@@ -45,7 +45,15 @@ public class AdminController {
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
         if (isUserAdmin()) {
-            return new ResponseEntity<>(this.userService.getAllUsers(), HttpStatus.OK);
+
+            List<User> users = userService.getAllUsers();
+
+            if (users.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(users, HttpStatus.OK);
+            }
+
         }
         // If the current user is not an admin, return HTTP 403 Forbidden
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -59,7 +67,14 @@ public class AdminController {
     @GetMapping("/users/{user_id}")
     public ResponseEntity<User> getUserById(@PathVariable long user_id) {
         if (isUserAdmin()) {
-            return new ResponseEntity<>(this.userService.getUserById(user_id), HttpStatus.OK);
+
+            User user = this.userService.getUserById(user_id);
+
+            if (user != null) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
         // If the current user is not an admin, return HTTP 403 Forbidden
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -72,18 +87,32 @@ public class AdminController {
      * @return Success message or Fail message
      */
     @DeleteMapping("/users/{user_id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable long user_id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable long user_id) {
         if (isUserAdmin()) {
             boolean isDeleted = this.userService.deleteUserById(user_id);
 
             if (isDeleted) {
-                return ResponseEntity.ok("User successfully deleted");
+                return new ResponseEntity<>(HttpStatus.OK);
             } else {
-                return ResponseEntity.status(404).body("User not found");
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }
         // If the current user is not an admin, return HTTP 403 Forbidden with a message
-        return ResponseEntity.status(403).body("Forbidden: Admins only");
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    @PatchMapping("/users/{user_id}")
+    public ResponseEntity<Void> updateUser(@PathVariable long user_id, boolean status) {
+        if (isUserAdmin()) {
+            boolean isUpdated = this.userService.updateUserPrivelege(user_id, status);
+
+            if (isUpdated) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
 

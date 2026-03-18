@@ -73,5 +73,42 @@ public class AdminControllerTest {
         assertEquals(2, user_res.size());
     }
 
+    @Test
+    void getSingleUser() {
+        // Create fake admin user
+        User adminUser = new User("admin@csumb.edu", true);
+
+        // SecurityContext setup with authenticated user
+        Authentication auth = new UsernamePasswordAuthenticationToken(
+                adminUser.getUsername(),
+                null,
+                List.of(() -> "ROLE_ADMIN") // ensures isAuthenticated() is true
+        );
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+        // mock userService to return the admin user
+        Mockito.when(userService.getUserByUsername(adminUser.getUsername()))
+                .thenReturn(Optional.of(adminUser));
+
+
+        // Mock the behavior of userRepository:
+        // Whenever getUserById() is called on userRepository,
+        // just return our fake user (a single user) instead of hitting the real database
+        Mockito.when(userService.getUserById(1L)).thenReturn(user_test_one);
+
+        // Step 4: call controller
+        ResponseEntity<User> result_one = adminController.getUserById(1);
+
+        // For the other user (user # 2)
+        Mockito.when(userService.getUserById(2L)).thenReturn(user_test_two);
+        ResponseEntity<User> result_two = adminController.getUserById(2);
+
+        // Step 5: assert
+        User user_one_res = result_one.getBody();
+        User user_two_res = result_two.getBody();
+        assertEquals("TestOne", user_one_res.getUsername());
+        assertEquals("TestTwo", user_two_res.getUsername());
+    }
+
 
 }
