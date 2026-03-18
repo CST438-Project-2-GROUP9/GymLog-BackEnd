@@ -21,15 +21,15 @@ public class WorkoutEntryController {
     public WorkoutEntryController(WorkoutEntryService service) {
         this.service = service;
     }
-    private String ownerId(){
-        return "1";
+    private Long ownerId(){
+        return 1L;
     }
 
     @PostMapping("/workouts/{workoutId}/exercises")
-    public ResponseEntity<?> addExcerciseToWorkout(@PathVariable Long WorkoutId, @Valid @RequestBody AddExerciseToWorkoutRequest req){
+    public ResponseEntity<?> addExcerciseToWorkout(@PathVariable Long workoutId, @Valid @RequestBody AddExerciseToWorkoutRequest req){
         try{
-            Long entryId= service.addExercise(ownerId(), WorkoutId, req);
-            return ResponseEntity.created(URI.create("/api/workouts/"+ WorkoutId + "/exercises/" + entryId)).body(java.util.Map.of("id", entryId));
+            Long entryId= service.addExercise(ownerId(), workoutId, req);
+            return ResponseEntity.created(URI.create("/api/workouts/"+ workoutId + "/exercises/" + entryId)).body(java.util.Map.of("id", entryId));
         } catch (Exception e) {
             return ResponseEntity.status(404).body(java.util.Map.of("error", e.getMessage()));
         }

@@ -25,9 +25,9 @@ public class WorkoutEntryService {
         this.workoutExerciseRepo = workoutExerciseRepo;
     }
     @Transactional
-    public Long addExercise(String ownerId, Long workoutId, AddExerciseToWorkoutRequest req) {
+    public Long addExercise(Long ownerId, Long workoutId, AddExerciseToWorkoutRequest req) {
         // Implementation for adding exercise to workout
-        Workout workout = workoutRepo.findByIdAndUserId(workoutId, Long.parseLong(ownerId))
+        Workout workout = workoutRepo.findByIdAndUserId(workoutId, ownerId)
             .orElseThrow(() -> new RuntimeException("Workout not found"));
         Exercise exercise = exerciseRepo.findById(req.getExerciseId())
             .orElseThrow(() -> new RuntimeException("Exercise not found"));
@@ -38,7 +38,7 @@ public class WorkoutEntryService {
     }
 
     @Transactional
-    public Long createRandomWorkout(String userId, String bodyRegion) {
+    public Long createRandomWorkout(Long userId, String bodyRegion) {
         Workout workout = new Workout(userId, "Random " + bodyRegion + " Workout");
         workout = workoutRepo.save(workout);
 
