@@ -2,6 +2,7 @@ package com.group9.fitnesstracker.services;
 
 import com.group9.fitnesstracker.entities.Workout;
 import com.group9.fitnesstracker.repository.WorkoutRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import java.util.Optional;
  * @version: 0.1.0
  *
  */
+@Service
 public class WorkoutServiceImpl implements WorkoutService {
     private final WorkoutRepository workoutRepository;
 

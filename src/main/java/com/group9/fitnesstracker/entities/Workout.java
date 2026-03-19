@@ -17,7 +17,7 @@ public class Workout {
     private Long id;
 
     @Column(name = "user_id", nullable = false)
-    private String userId;
+    private Long userId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -28,7 +28,7 @@ public class Workout {
     public Workout() {
     }
 
-    public Workout(String userId, String name) {
+    public Workout(Long userId, String name) {
         this.userId = userId;
         this.name = name;
     }
@@ -37,11 +37,11 @@ public class Workout {
         return id;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
