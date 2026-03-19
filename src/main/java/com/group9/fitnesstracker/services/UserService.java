@@ -15,9 +15,11 @@ import java.util.Optional;
  */
 public interface UserService {
     List<User> getAllUsers();
-    Optional<User> getUserById(Long id);
+    User getUserById(Long id);
     Optional<User> getUserByUsername(String username);
     boolean usernameExists(String username);
 
     boolean usernameExits(String username);
+
+    boolean deleteUserById(long userId);
 }
