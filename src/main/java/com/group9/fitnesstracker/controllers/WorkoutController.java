@@ -16,6 +16,9 @@ import java.util.List;
  * @version: 0.1.0
  *
  */
+
+@RestController
+@RequestMapping("/api/workouts")
 public class WorkoutController {
     private final WorkoutService workoutService;
 
