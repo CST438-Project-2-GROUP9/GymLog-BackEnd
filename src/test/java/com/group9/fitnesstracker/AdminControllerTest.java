@@ -32,9 +32,6 @@ public class AdminControllerTest {
     @Mock
     private UserService userService;
 
-    @MockitoBean
-    private WorkoutService workoutService;
-
     private User user_test_one;
     private User user_test_two;
 
