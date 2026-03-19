@@ -21,5 +21,7 @@ public interface UserService {
 
     boolean usernameExits(String username);
 
-    boolean deleteUserById(long userId);
+    boolean deleteUserById(long id);
+
+    boolean updateUserPrivelege(long id, boolean status);
 }
