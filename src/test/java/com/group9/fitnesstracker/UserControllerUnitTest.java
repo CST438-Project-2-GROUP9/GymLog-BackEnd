@@ -19,11 +19,11 @@ class UserControllerUnitTest {
         UserService userService = mock(UserService.class);
         UserController controller = new UserController(userService);
 
-        // If your service returns Optional<User>, keep Optional here.
-        // If it returns User directly, change Optional.of("dummy") to whatever your User object is.
-        when(userService.getUserById(1L)).thenReturn(Optional.of(new User("alice", false)));
+
+        when(userService.getUserById(1L)).thenReturn(new User("alice", false));
         when(userService.getUserByUsername("alice")).thenReturn(Optional.of(new User("alice", false)));
 
+        when(userService.getUserById(1L)).thenReturn(new User("alice", false));
         ResponseEntity<?> res = controller.getUserById(1L);
 
         assertEquals(200, res.getStatusCode().value());
