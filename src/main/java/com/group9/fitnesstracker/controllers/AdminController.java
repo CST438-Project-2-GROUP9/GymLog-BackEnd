@@ -102,12 +102,12 @@ public class AdminController {
     }
 
     @PatchMapping("/users/{user_id}")
-    public ResponseEntity<Void> updateUser(@PathVariable long user_id, boolean status) {
+    public ResponseEntity<User> updateUser(@PathVariable long user_id, boolean status) {
         if (isUserAdmin()) {
             boolean isUpdated = this.userService.updateUserPrivelege(user_id, status);
 
             if (isUpdated) {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(userService.getUserById(user_id),HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

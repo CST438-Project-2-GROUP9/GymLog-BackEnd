@@ -36,7 +36,7 @@ public interface  UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Transactional
     @Query(value = "UPDATE \"user\" SET is_admin = :status WHERE user_id = :id", nativeQuery = true)
-    boolean updateUserPrivelege(long id, boolean status);
+    int updateUserPrivelege(long id, boolean status);
 }
 
 

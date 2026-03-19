@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUserPrivelege(long id, boolean status) {
-        return userRepository.updateUserPrivelege(id, status);
+        return userRepository.updateUserPrivelege(id, status) > 0;
     }
     
 }
