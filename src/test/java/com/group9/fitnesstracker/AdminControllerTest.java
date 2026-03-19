@@ -4,6 +4,7 @@ import com.group9.fitnesstracker.controllers.AdminController;
 import com.group9.fitnesstracker.entities.User;
 import com.group9.fitnesstracker.repository.UserRepository;
 import com.group9.fitnesstracker.services.UserService;
+import com.group9.fitnesstracker.services.WorkoutService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.Arrays;
 import java.util.List;
