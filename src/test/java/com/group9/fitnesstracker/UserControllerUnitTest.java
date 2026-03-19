@@ -21,9 +21,6 @@ class UserControllerUnitTest {
 
 
         when(userService.getUserById(1L)).thenReturn(new User("alice", false));
-        when(userService.getUserByUsername("alice")).thenReturn(Optional.of(new User("alice", false)));
-
-        when(userService.getUserById(1L)).thenReturn(new User("alice", false));
         ResponseEntity<?> res = controller.getUserById(1L);
 
         assertEquals(200, res.getStatusCode().value());
