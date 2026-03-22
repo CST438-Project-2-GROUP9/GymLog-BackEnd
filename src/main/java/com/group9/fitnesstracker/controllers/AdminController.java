@@ -15,6 +15,7 @@ import java.util.Optional;
 
 /**
  * Admin REST controller
+ * Includes GET all users, GET single user, DELETE user, UPDATE (Partial) user
  * @author Neil Cabanilla
  * @date 3/22/2026
  */
