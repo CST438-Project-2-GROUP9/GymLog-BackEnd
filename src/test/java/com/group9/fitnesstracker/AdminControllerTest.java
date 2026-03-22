@@ -44,22 +44,6 @@ public class AdminControllerTest {
 
     @Test
     void getAllUsers() {
-        // Create fake admin user
-        User adminUser = new User("admin@csumb.edu", true);
-
-        // SecurityContext setup with authenticated user
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                adminUser.getUsername(),
-                null,
-                List.of(() -> "ROLE_ADMIN") // ensures isAuthenticated() is true
-        );
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        // mock userService to return the admin user
-        Mockito.when(userService.getUserByUsername(adminUser.getUsername()))
-                .thenReturn(Optional.of(adminUser));
-
-
         // Creating fake list
         List<User> users = Arrays.asList(user_test_one, user_test_two);
 
@@ -81,18 +65,6 @@ public class AdminControllerTest {
 
     @Test
     void getSingleUser() {
-        User adminUser = new User("admin@csumb.edu", true);
-
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                adminUser.getUsername(),
-                null,
-                List.of(() -> "ROLE_ADMIN")
-        );
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        Mockito.when(userService.getUserByUsername(adminUser.getUsername()))
-                .thenReturn(Optional.of(adminUser));
-
         // Mock the behavior of userRepository:
         // Whenever getUserById() is called on userRepository,
         // just return our fake user (a single user) instead of hitting the real database
@@ -118,18 +90,6 @@ public class AdminControllerTest {
 
     @Test
     void deleteUser() {
-        User adminUser = new User("admin@csumb.edu", true);
-
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                adminUser.getUsername(),
-                null,
-                List.of(() -> "ROLE_ADMIN") // ensures isAuthenticated() is true
-        );
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        Mockito.when(userService.getUserByUsername(adminUser.getUsername()))
-                .thenReturn(Optional.of(adminUser));
-
         // Mock the behavior of userRepository:
         // Whenever deleteuserById is called on userRepository,
         // The first thenReturn is true meaning user was successfully deleted
@@ -153,19 +113,6 @@ public class AdminControllerTest {
 
     @Test
     void updateUser() {
-        User adminUser = new User("admin@csumb.edu", true);
-
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                adminUser.getUsername(),
-                null,
-                List.of(() -> "ROLE_ADMIN") // ensures isAuthenticated() is true
-        );
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        Mockito.when(userService.getUserByUsername(adminUser.getUsername()))
-                .thenReturn(Optional.of(adminUser));
-
-
         // Mock the behavior of userRepository:
         // Whenever updateUserPrivilege is called on userRepository,
         // The thenReturn returns true, meaning user privilege set to true (isAdmin)

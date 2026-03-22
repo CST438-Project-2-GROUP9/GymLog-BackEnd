@@ -13,6 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Admin REST controller
+ * @author Neil Cabanilla
+ * @date 3/22/2026
+ */
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -23,52 +28,21 @@ public class AdminController {
         this.userService = userService;
     }
 
-    // Helper method to check if isAdmin()
-    private boolean isUserAdmin() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || !authentication.isAuthenticated()) {
-            return false;
-        }
-
-        Object principal = authentication.getPrincipal();
-
-        if (!(principal instanceof org.springframework.security.oauth2.core.user.OAuth2User oauthUser)) {
-            return false;
-        }
-
-        String email = oauthUser.getAttribute("email");
-
-        if (email == null || email.isBlank()) {
-            return false;
-        }
-
-        System.out.println("Current email/user logged in: " + email);
-
-        return userService.getUserByUsername(email)
-                .map(User::getIsAdmin)
-                .orElse(false);
-    }
-
     /**
      * Gets all users (Admin only)
      * @return all the users in the database, or an error
      */
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
-        if (isUserAdmin()) {
 
-            List<User> users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
 
-            if (users.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<>(users, HttpStatus.OK);
-            }
-
+        if (users.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
-        // If the current user is not an admin, return HTTP 403 Forbidden
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
     }
 
     /**
@@ -78,18 +52,15 @@ public class AdminController {
      */
     @GetMapping("/users/{user_id}")
     public ResponseEntity<User> getUserById(@PathVariable long user_id) {
-        if (isUserAdmin()) {
 
-            User user = this.userService.getUserById(user_id);
+        User user = this.userService.getUserById(user_id);
 
-            if (user != null) {
-                return new ResponseEntity<>(user, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        // If the current user is not an admin, return HTTP 403 Forbidden
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
     }
 
     /**
@@ -100,31 +71,33 @@ public class AdminController {
      */
     @DeleteMapping("/users/{user_id}")
     public ResponseEntity<Void> deleteUser(@PathVariable long user_id) {
-        if (isUserAdmin()) {
-            boolean isDeleted = this.userService.deleteUserById(user_id);
 
-            if (isDeleted) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+        boolean isDeleted = this.userService.deleteUserById(user_id);
+
+        if (isDeleted) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        // If the current user is not an admin, return HTTP 403 Forbidden with a message
-        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
     }
 
+    /**
+     * Updates a User's privilege by giving them admin access or revoking admin access
+     * @param user_id The user to be updated
+     * @param status Setting true or false for admin status
+     * @return a ResponseEntity<User> a User
+     */
     @PatchMapping("/users/{user_id}")
     public ResponseEntity<User> updateUser(@PathVariable long user_id, boolean status) {
-        if (isUserAdmin()) {
-            boolean isUpdated = this.userService.updateUserPrivelege(user_id, status);
+        boolean isUpdated = this.userService.updateUserPrivelege(user_id, status);
 
-            if (isUpdated) {
-                return new ResponseEntity<>(userService.getUserById(user_id),HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+        if (isUpdated) {
+            return new ResponseEntity<>(userService.getUserById(user_id),HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
     }
 
 
