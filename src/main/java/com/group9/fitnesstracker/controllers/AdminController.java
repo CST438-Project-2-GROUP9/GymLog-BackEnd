@@ -8,7 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -23,19 +25,29 @@ public class AdminController {
 
     // Helper method to check if isAdmin()
     private boolean isUserAdmin() {
-        // Get the currently authenticated user; return false if not logged in
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         if (authentication == null || !authentication.isAuthenticated()) {
             return false;
         }
 
-        // If authentication is not false
-        // Get the username of the logged in person, and checked if it is in database and check if it's an admin
-        String username = authentication.getName();
+        Object principal = authentication.getPrincipal();
 
-        // System.out.println("Logged in username: " + authentication.getName());
-        Optional<User> user = userService.getUserByUsername(username);
-        return user.isPresent() && user.get().getIsAdmin();
+        if (!(principal instanceof org.springframework.security.oauth2.core.user.OAuth2User oauthUser)) {
+            return false;
+        }
+
+        String email = oauthUser.getAttribute("email");
+
+        if (email == null || email.isBlank()) {
+            return false;
+        }
+
+        System.out.println("Current email/user logged in: " + email);
+
+        return userService.getUserByUsername(email)
+                .map(User::getIsAdmin)
+                .orElse(false);
     }
 
     /**
