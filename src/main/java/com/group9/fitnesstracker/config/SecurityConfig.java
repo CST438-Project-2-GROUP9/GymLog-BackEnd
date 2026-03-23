@@ -29,7 +29,7 @@ public class SecurityConfig {
                 )
                 // enable Google OAuth login (creates session)
                 .oauth2Login(oAuth2Login -> {
-                    oAuth2Login.defaultSuccessUrl("http://localhost:5173/admin");
+                    oAuth2Login.defaultSuccessUrl("http://localhost:5173/dashboard");
                     oAuth2Login.userInfoEndpoint(userInfo -> userInfo.userService(oAuth2UserService));
                 })
                 .cors(cors -> {
