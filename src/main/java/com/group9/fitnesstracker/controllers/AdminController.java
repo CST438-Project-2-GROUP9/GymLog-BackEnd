@@ -90,7 +90,7 @@ public class AdminController {
      * @return a ResponseEntity<User> a User
      */
     @PatchMapping("/users/{user_id}")
-    public ResponseEntity<User> updateUser(@PathVariable long user_id, boolean status) {
+    public ResponseEntity<User> updateUser(@PathVariable long user_id,  @RequestParam boolean status) {
         boolean isUpdated = this.userService.updateUserPrivelege(user_id, status);
 
         if (isUpdated) {
