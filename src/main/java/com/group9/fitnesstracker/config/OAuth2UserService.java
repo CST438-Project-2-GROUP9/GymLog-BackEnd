@@ -35,29 +35,33 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
             User newUser = new User(email, false);
             userService.saveUser(newUser.getUsername(), newUser.getIsAdmin());
         } else {
-            if (existingUser.isPresent() && existingUser.get().getIsAdmin()) {
-                List<GrantedAuthority> authorities = new ArrayList<>(oauth2User.getAuthorities());
+            List<GrantedAuthority> authorities = new ArrayList<>(oauth2User.getAuthorities());
+
+            if (existingUser.get().getIsAdmin()) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-                return new OAuth2User() {
-                    @Override
-                    public Map<String, Object> getAttributes() {
-                        return oauth2User.getAttributes();
-                    }
-
-                    @Override
-                    public Collection<? extends GrantedAuthority> getAuthorities() {
-                        return authorities;
-                    }
-
-                    @Override
-                    public String getName() {
-                        return oauth2User.getName();
-                    }
-                };
+            } else {
+                authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             }
-        }
+            return new OAuth2User() {
+                @Override
+                public Map<String, Object> getAttributes() {
+                    return oauth2User.getAttributes();
+                }
 
+                @Override
+                public Collection<? extends GrantedAuthority> getAuthorities() {
+                    return authorities;
+                }
+
+                @Override
+                public String getName() {
+                    return oauth2User.getName();
+                }
+            };
+        }
         return oauth2User;
     }
 }
+
+
