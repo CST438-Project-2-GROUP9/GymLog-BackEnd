@@ -14,7 +14,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                //will enable CORS so the browser can call backend from localhost
+                .cors(Customizer.withDefaults())
+                //for dev, this avoids csrf blocking
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
+
                 .authorizeHttpRequests(authorize -> authorize
+                                .requestMatchers("/", "/error", "/oauth2/**", "/login/**").permitAll()
+                                .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers("/user/currentUser", "/api/workouts/**").permitAll()
                         // allow landing + auth endpoints
 //                        .requestMatchers("/", "/error", "/oauth2/**", "/login/**").permitAll()
                         // everything else requires auth (either session login or JWT depending on request)
