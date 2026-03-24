@@ -56,5 +56,10 @@ public class UserServiceImpl implements UserService {
     public boolean updateUserPrivelege(long id, boolean status) {
         return userRepository.updateUserPrivelege(id, status) > 0;
     }
-    
+
+    @Override
+    public boolean deleteWorkout(Long id) {
+        return false;
+    }
+
 }
