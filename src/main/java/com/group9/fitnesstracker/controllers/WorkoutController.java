@@ -42,4 +42,10 @@ public class WorkoutController {
     public ResponseEntity<Workout> createWorkout(@RequestBody Workout workout) {
         return new ResponseEntity<>(workoutService.createWorkout(workout), HttpStatus.CREATED);
     }
+    //remove workout feature
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
+        boolean deleted = workoutService.deleteWorkout(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
 }
