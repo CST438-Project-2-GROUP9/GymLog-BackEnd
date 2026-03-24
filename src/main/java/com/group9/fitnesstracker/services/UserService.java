@@ -24,4 +24,6 @@ public interface UserService {
     boolean deleteUserById(long id);
 
     boolean updateUserPrivelege(long id, boolean status);
+
+    boolean deleteWorkout(Long id);
 }
