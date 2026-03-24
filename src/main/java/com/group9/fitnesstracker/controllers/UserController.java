@@ -3,10 +3,7 @@ package com.group9.fitnesstracker.controllers;
 import com.group9.fitnesstracker.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * User Rest Controller
@@ -43,4 +40,14 @@ public class UserController {
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         return new ResponseEntity<>(this.userService.getUserById(id), HttpStatus.OK);
     }
+    //should fix my 404 error to let my AdminRoute logic work
+    @GetMapping("/currentUser")
+    public ResponseEntity<?> currentUser() {
+
+        return ResponseEntity.ok(java.util.Map.of(
+                "isAdmin", false,
+                "id", 1
+        ));
+    }
+
 }
