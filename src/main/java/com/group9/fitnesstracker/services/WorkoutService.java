@@ -17,4 +17,6 @@ public interface WorkoutService {
     List<Workout> getAllWorkouts();
     Optional<Workout> getWorkoutById(Long id);
     Workout createWorkout(Workout workout);
+
+    boolean deleteWorkout(Long id);
 }
