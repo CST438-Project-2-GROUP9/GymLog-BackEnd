@@ -24,12 +24,16 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/oauth2/**", "/login/**", "/error").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 // enable Google OAuth login (creates session)
                 .oauth2Login(oAuth2Login -> {
-                    oAuth2Login.defaultSuccessUrl("http://localhost:5173/dashboard");
+                    oAuth2Login.successHandler((request, response, authentication) -> {
+                        response.sendRedirect("http://localhost:5173/dashboard");
+                    });
+//                    oAuth2Login.defaultSuccessUrl("http://localhost:5173/dashboard");
                     oAuth2Login.userInfoEndpoint(userInfo -> userInfo.userService(oAuth2UserService));
                 })
                 .cors(cors -> {
