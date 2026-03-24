@@ -10,6 +10,8 @@ public class AddExerciseToWorkoutRequest {
     @NotNull
     private Integer reps;
 
+    public AddExerciseToWorkoutRequest() {}
+
     public Long getExerciseId(){
         return exerciseId;
     }
