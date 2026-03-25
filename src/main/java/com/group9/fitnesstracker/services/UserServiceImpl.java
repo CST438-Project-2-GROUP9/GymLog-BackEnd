@@ -2,6 +2,7 @@ package com.group9.fitnesstracker.services;
 
 import com.group9.fitnesstracker.repository.UserRepository;
 import com.group9.fitnesstracker.entities.User;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,6 +56,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUserPrivelege(long id, boolean status) {
         return userRepository.updateUserPrivelege(id, status) > 0;
+    }
+
+    @Override
+    @Transactional
+    public void saveUser(String email, boolean status) {
+        userRepository.saveUser(email, status);
+        System.out.println("User inserted into DB: " + email);
     }
     
 }
