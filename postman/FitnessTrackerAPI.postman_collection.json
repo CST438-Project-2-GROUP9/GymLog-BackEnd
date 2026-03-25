@@ -8,7 +8,7 @@
   },
   "item": [
     {
-      "name": "GetAllUsers",
+      "name": "GetAllUsers (Admin)",
       "request": {
         "method": "GET",
         "header": [
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "name": "GetASingleUser",
+      "name": "GetASingleUser (Admin)",
       "request": {
         "method": "GET",
         "header": [
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "name": "DeleteAUser",
+      "name": "DeleteAUser (Admin)",
       "request": {
         "method": "DELETE",
         "header": [
@@ -202,7 +202,7 @@
       ]
     },
     {
-      "name": "UpdateUserPrivilege(ToTrue)",
+      "name": "UpdateUserPrivilege(ToTrue) (Admin)",
       "request": {
         "method": "PATCH",
         "header": [
@@ -287,7 +287,7 @@
       ]
     },
     {
-      "name": "UpdateUserPrivilege(ToFalse)",
+      "name": "UpdateUserPrivilege(ToFalse) (Admin)",
       "request": {
         "method": "PATCH",
         "header": [
@@ -481,7 +481,7 @@
       ]
     },
     {
-      "name": "GetCurrentUserAttributes",
+      "name": "GetCurrentUserAttributes (/me)",
       "request": {
         "method": "GET",
         "header": [],
@@ -719,6 +719,374 @@
             }
           ],
           "body": "{\r\n    \"userId\": 12,\r\n    \"name\": \"leg extension\",\r\n    \"id\": 15\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "CreateWorkout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"Testing workout\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/workouts",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "workouts"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "CreateWorkout",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"Testing workout\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/workouts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "workouts"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"userId\": 1,\r\n    \"name\": \"Testing workout\",\r\n    \"id\": 16\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "CreateExercise",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Testing\",\r\n  \"description\": \"test\",\r\n  \"bodyRegion\": \"Test\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/exercises",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "exercises"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "CreateExercise",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"Testing workout\"\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/exercises",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "exercises"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"name\": \"Testing\",\r\n    \"description\": \"test\",\r\n    \"bodyRegion\": \"Test\",\r\n    \"id\": 4\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "AddExerciseToWorkout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"exerciseId\": 4,\r\n  \"sets\": 3,\r\n  \"reps\": 12\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/workouts/16/exercises",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "workouts",
+            "16",
+            "exercises"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "AddExerciseToWorkout",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"exerciseId\": 4,\r\n  \"sets\": 3,\r\n  \"reps\": 12\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/workouts/16/exercises",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "workouts",
+                "16",
+                "exercises"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"id\": 9\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "RandomWorkout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{base_url}}/api/workouts/random/Upper",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "workouts",
+            "random",
+            "Upper"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "RandomWorkout",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/workouts/random/Upper",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "workouts",
+                "random",
+                "Upper"
+              ]
+            }
+          },
+          "code": 201,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"workoutId\": 17,\r\n    \"message\": \"Random workout created successfully\"\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetUserById",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user/getUserById/{{user_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "getUserById",
+            "{{user_id}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetUserById",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/user/getUserById/{{user_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user",
+                "getUserById",
+                "{{user_id}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"username\": \"testdummydelete\",\r\n    \"isAdmin\": false,\r\n    \"id\": 1\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetUsernameExists",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user/usernameExists/testdummy2",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "usernameExists",
+            "testdummy2"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetUsernameExists",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/user/usernameExists/testdummy2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user",
+                "usernameExists",
+                "testdummy2"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"exists\": false,\r\n    \"username\": \"testdummy2\"\r\n}"
         }
       ]
     }
