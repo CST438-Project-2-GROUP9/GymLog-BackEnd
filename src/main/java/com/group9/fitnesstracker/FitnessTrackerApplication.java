@@ -13,9 +13,4 @@ public class FitnessTrackerApplication {
 		SpringApplication.run(FitnessTrackerApplication.class, args);
 	}
 
-	//Testing to see if Docker image is able to run
-	@RequestMapping("/")
-	public String home() {
-		return "Hello Docker World";
-	}
 }
