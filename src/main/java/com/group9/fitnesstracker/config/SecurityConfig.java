@@ -1,9 +1,10 @@
 package com.group9.fitnesstracker.config;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -11,7 +12,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
     private final OAuth2UserService oAuth2UserService;
 
@@ -23,35 +23,43 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/oauth2/**", "/login/**", "/error").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                // enable Google OAuth login (creates session)
+                .exceptionHandling(ex -> ex
+                        .defaultAuthenticationEntryPointFor(
+                                (request, response, authException) -> {
+                                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                                    response.setContentType("application/json");
+                                    response.getWriter().write("{\"error\":\"unauthorized\"}");
+                                },
+                                request -> request.getRequestURI().startsWith("/user/")
+                        )
+                )
                 .oauth2Login(oAuth2Login -> {
                     oAuth2Login.successHandler((request, response, authentication) -> {
                         response.sendRedirect("http://localhost:5173/dashboard");
                     });
-//                    oAuth2Login.defaultSuccessUrl("http://localhost:5173/dashboard");
                     oAuth2Login.userInfoEndpoint(userInfo -> userInfo.userService(oAuth2UserService));
-                })
-                .cors(cors -> {
-                        cors.configurationSource(getUrlBasedCorsConfigurationSource());
                 });
 
         return http.build();
     }
-    private static UrlBasedCorsConfigurationSource getUrlBasedCorsConfigurationSource() {
+
+    @Bean
+    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("http://localhost:5173");
-        corsConfiguration.addAllowedHeader("*");
-        corsConfiguration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS","PATCH"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173"));
+        corsConfiguration.setAllowedHeaders(List.of("*"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         corsConfiguration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
-
         return source;
     }
 }
