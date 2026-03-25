@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface  UserRepository extends JpaRepository<User, Long> {
+    @Query(value = "SELECT * FROM \"user\" WHERE username = :username", nativeQuery = true)
     Optional<User> findByUsername(String username);
 
     boolean existsByUsername(String username);
@@ -37,6 +38,11 @@ public interface  UserRepository extends JpaRepository<User, Long> {
     @Transactional
     @Query(value = "UPDATE \"user\" SET is_admin = :status WHERE user_id = :id", nativeQuery = true)
     int updateUserPrivelege(long id, boolean status);
+
+    @Modifying
+    @Transactional
+    @Query(value ="INSERT INTO \"user\" (username, is_admin) VALUES (:email, :status)", nativeQuery = true)
+    void saveUser(String email, boolean status);
 }
 
 
