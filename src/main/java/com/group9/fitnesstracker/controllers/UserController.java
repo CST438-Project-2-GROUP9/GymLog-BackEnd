@@ -49,15 +49,35 @@ public class UserController {
 
         if (authentication == null || !authentication.isAuthenticated()) {
             response.put("isAdmin", false);
+            response.put("id", null);
+            response.put("username", null);
             return response;
         }
+
+        String username = authentication.getName();
+
+        if (authentication.getPrincipal() instanceof org.springframework.security.oauth2.core.user.OAuth2User oauthUser) {
+            Object emailAttr = oauthUser.getAttributes().get("email");
+            if (emailAttr != null) {
+                username = emailAttr.toString();
+            }
+        }
+
+        Optional<User> userOpt = userService.getUserByUsername(username);
 
         boolean isAdmin = authentication.getAuthorities().stream()
                 .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
 
         response.put("isAdmin", isAdmin);
-        System.out.println("Authentication: " + authentication);
-        System.out.println("Authorities: " + authentication.getAuthorities());
+
+        if (userOpt.isPresent()) {
+            response.put("id", userOpt.get().getId());
+            response.put("username", userOpt.get().getUsername());
+        } else {
+            response.put("id", null);
+            response.put("username", username);
+        }
+
         return response;
     }
 
