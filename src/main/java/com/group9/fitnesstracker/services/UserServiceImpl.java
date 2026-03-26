@@ -59,10 +59,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean deleteWorkoutById(long id) {
+        return false;
+    }
+
+    @Override
     @Transactional
     public void saveUser(String email, boolean status) {
         userRepository.saveUser(email, status);
         System.out.println("User inserted into DB: " + email);
     }
-    
 }
