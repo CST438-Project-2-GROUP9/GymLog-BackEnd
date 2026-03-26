@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
@@ -60,8 +60,7 @@ public class SecurityConfig {
             oAuth2Login.defaultSuccessUrl("http://localhost:5173/dashboard");
             oAuth2Login.userInfoEndpoint(userInfo -> userInfo.userService(oAuth2UserService));
         })
-                .cors(cors -> cors.configurationSource((CorsConfigurationSource) corsConfigurationSource()));
-
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
         return http.build();
     }
 
