@@ -24,6 +24,6 @@ public interface UserService {
     boolean deleteUserById(long id);
 
     boolean updateUserPrivelege(long id, boolean status);
-
-    void saveUser(String username, boolean status);
+    boolean deleteWorkoutById(long id);
+    void saveUser(String username,boolean user);
 }
