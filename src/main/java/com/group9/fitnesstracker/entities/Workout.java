@@ -21,7 +21,7 @@ public class Workout {
 
     @Column(name = "name", nullable = false)
     private String name;
-    
+
 //    @Column(nullable = false, updatable = false)
 //    private Instant createdAt = Instant.now();
 
