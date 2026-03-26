@@ -28,9 +28,9 @@ public class WorkoutEntryService {
     public Long addExercise(Long ownerId, Long workoutId, AddExerciseToWorkoutRequest req) {
         // Implementation for adding exercise to workout
         Workout workout = workoutRepo.findByIdAndUserId(workoutId, ownerId)
-                .orElseThrow(() -> new RuntimeException("Workout not found"));
+            .orElseThrow(() -> new RuntimeException("Workout not found"));
         Exercise exercise = exerciseRepo.findById(req.getExerciseId())
-                .orElseThrow(() -> new RuntimeException("Exercise not found"));
+            .orElseThrow(() -> new RuntimeException("Exercise not found"));
 
         WorkoutExercise entry = new WorkoutExercise(workoutId, exercise.getId(), req.getSets(), req.getReps());
         workoutExerciseRepo.save(entry);
@@ -54,5 +54,13 @@ public class WorkoutEntryService {
         }
 
         return workout.getId();
+    }
+
+    @Transactional
+    public List<WorkoutExercise> getExercisesForWorkout(Long userId, Long workoutId) {
+        workoutRepo.findByIdAndUserId(workoutId, userId)
+                .orElseThrow(() -> new RuntimeException("Workout not found or access denied"));
+
+        return workoutExerciseRepo.findByWorkoutId(workoutId);
     }
 }
