@@ -63,5 +63,3 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
         return oauth2User;
     }
 }
-
-
