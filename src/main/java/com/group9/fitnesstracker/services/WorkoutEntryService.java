@@ -55,4 +55,12 @@ public class WorkoutEntryService {
 
         return workout.getId();
     }
+
+    @Transactional
+    public List<WorkoutExercise> getExercisesForWorkout(Long userId, Long workoutId) {
+        workoutRepo.findByIdAndUserId(workoutId, userId)
+                .orElseThrow(() -> new RuntimeException("Workout not found or access denied"));
+
+        return workoutExerciseRepo.findByWorkoutId(workoutId);
+    }
 }
