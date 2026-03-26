@@ -1,0 +1,1144 @@
+{
+  "info": {
+    "_postman_id": "89ec3435-cb51-45af-a007-da553182cce3",
+    "name": "FitnessTrackerAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53397664",
+    "_collection_link": "https://go.postman.co/collection/53397664-89ec3435-cb51-45af-a007-da553182cce3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GetAllUsers (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/admin/users",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "admin",
+            "users"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetAllUsers",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "[\r\n    {\r\n        \"username\": \"118124247660049003465\",\r\n        \"isAdmin\": true,\r\n        \"id\": 5\r\n    },\r\n    {\r\n        \"username\": \"ncabanilla@csumb.edu\",\r\n        \"isAdmin\": true,\r\n        \"id\": 3\r\n    },\r\n    {\r\n        \"username\": \"dkrayilo@csumb.edu\",\r\n        \"isAdmin\": true,\r\n        \"id\": 11\r\n    },\r\n    {\r\n        \"username\": \"victoperez@csumb.edu\",\r\n        \"isAdmin\": true,\r\n        \"id\": 12\r\n    },\r\n    {\r\n        \"username\": \"testdummy1\",\r\n        \"isAdmin\": false,\r\n        \"id\": 1\r\n    },\r\n    {\r\n        \"username\": \"testdummy2\",\r\n        \"isAdmin\": false,\r\n        \"id\": 2\r\n    },\r\n    {\r\n        \"username\": \"testdelete\",\r\n        \"isAdmin\": false,\r\n        \"id\": 4\r\n    }\r\n]"
+        }
+      ]
+    },
+    {
+      "name": "GetASingleUser (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user/getUserById/{{user_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "getUserById",
+            "{{user_id}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetASingleUser",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user/getUserById/{{user_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user",
+                "getUserById",
+                "{{user_id}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"username\": \"testdummy1\",\r\n    \"isAdmin\": false,\r\n    \"id\": 1\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "DeleteAUser (Admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "2CEE2B62709F8F872E4BDFD5FC72B5A8",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/admin/users/{{user_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "admin",
+            "users",
+            "{{user_id}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "DeleteAUser",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "2CEE2B62709F8F872E4BDFD5FC72B5A8",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users/{{user_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "{{user_id}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "UpdateUserPrivilege(ToTrue) (Admin)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "2CEE2B62709F8F872E4BDFD5FC72B5A8",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/admin/users/{{user_id_2}}?status=true",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "admin",
+            "users",
+            "{{user_id_2}}"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "true",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "UpdateUserPrivilege(ToTrue)",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "2CEE2B62709F8F872E4BDFD5FC72B5A8",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users/{{user_id_2}}?status=true",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "{{user_id_2}}"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"username\": \"testdummy2\",\r\n    \"isAdmin\": true,\r\n    \"id\": 2\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "UpdateUserPrivilege(ToFalse) (Admin)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "2CEE2B62709F8F872E4BDFD5FC72B5A8",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/admin/users/{{user_id_2}}?status=false",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "admin",
+            "users",
+            "{{user_id_2}}"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "false"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "UpdateUserPrivilege(ToFalse)",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "2CEE2B62709F8F872E4BDFD5FC72B5A8",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users/{{user_id_2}}?status=false",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "{{user_id_2}}"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"username\": \"testdummy2\",\r\n    \"isAdmin\": false,\r\n    \"id\": 2\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetCurrentUser(Shows Admin status)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user/currentUser",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "currentUser"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetCurrentUser(Shows Admin status)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user/currentUser",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user",
+                "currentUser"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"isAdmin\": true\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetAUserByUsername",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/user/getUserByUsername/{{dummy_user}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "getUserByUsername",
+            "{{dummy_user}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetAUserByUsername",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/user/getUserByUsername/{{dummy_user}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user",
+                "getUserByUsername",
+                "{{dummy_user}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"username\": \"testdummy2\",\r\n    \"isAdmin\": false,\r\n    \"id\": 2\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetCurrentUserAttributes (/me)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/me",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "me"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetCurrentUserAttributes",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "me"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"sub\": \"112172814059725051565\",\r\n    \"name\": \"Neil Cabanilla\",\r\n    \"given_name\": \"Neil\",\r\n    \"family_name\": \"Cabanilla\",\r\n    \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocI54bQhFIWMMASAi51lKTWpsc_Ko-Uw_hCMOrbVq8COn5zptQ=s96-c\",\r\n    \"email\": \"ncabanilla@csumb.edu\",\r\n    \"email_verified\": true,\r\n    \"hd\": \"csumb.edu\"\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetExerciseById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/exercises/{{exercise_id_1}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "exercises",
+            "{{exercise_id_1}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetExerciseById",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/exercises/{{exercise_id_1}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "exercises",
+                "{{exercise_id_1}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"name\": \"Bench Press\",\r\n    \"description\": \"Uses a barbel on flat bench\",\r\n    \"bodyRegion\": \"Upper\",\r\n    \"id\": 1\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetAllExercises",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/exercises",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "exercises"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetAllExercises",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/exercises",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "exercises"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "[\r\n    {\r\n        \"name\": \"Bench Press\",\r\n        \"description\": \"Uses a barbel on flat bench\",\r\n        \"bodyRegion\": \"Upper\",\r\n        \"id\": 1\r\n    },\r\n    {\r\n        \"name\": \"Incline Bench Press\",\r\n        \"description\": \"Uses barbel for incline\",\r\n        \"bodyRegion\": \"Upper\",\r\n        \"id\": 2\r\n    }\r\n]"
+        }
+      ]
+    },
+    {
+      "name": "GetAllWorkouts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/workouts",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "workouts"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetAllWorkouts",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/workouts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "workouts"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "[\r\n    {\r\n        \"userId\": 12,\r\n        \"name\": \"leg extension\",\r\n        \"id\": 15\r\n    }\r\n]"
+        }
+      ]
+    },
+    {
+      "name": "GetWorkoutById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/workouts/15",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "workouts",
+            "15"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetWorkoutById",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/workouts/15",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "workouts",
+                "15"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"userId\": 12,\r\n    \"name\": \"leg extension\",\r\n    \"id\": 15\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "CreateWorkout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"Testing workout\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/workouts",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "workouts"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "CreateWorkout",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"Testing workout\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/workouts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "workouts"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"userId\": 1,\r\n    \"name\": \"Testing workout\",\r\n    \"id\": 16\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "CreateExercise",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Testing\",\r\n  \"description\": \"test\",\r\n  \"bodyRegion\": \"Test\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/exercises",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "exercises"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "CreateExercise",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"Testing workout\"\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/exercises",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "exercises"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"name\": \"Testing\",\r\n    \"description\": \"test\",\r\n    \"bodyRegion\": \"Test\",\r\n    \"id\": 4\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "AddExerciseToWorkout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"exerciseId\": 4,\r\n  \"sets\": 3,\r\n  \"reps\": 12\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/workouts/16/exercises",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "workouts",
+            "16",
+            "exercises"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "AddExerciseToWorkout",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"exerciseId\": 4,\r\n  \"sets\": 3,\r\n  \"reps\": 12\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/workouts/16/exercises",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "workouts",
+                "16",
+                "exercises"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"id\": 9\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "RandomWorkout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{base_url}}/api/workouts/random/Upper",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "workouts",
+            "random",
+            "Upper"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "RandomWorkout",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/workouts/random/Upper",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "workouts",
+                "random",
+                "Upper"
+              ]
+            }
+          },
+          "code": 201,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"workoutId\": 17,\r\n    \"message\": \"Random workout created successfully\"\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetUserById",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user/getUserById/{{user_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "getUserById",
+            "{{user_id}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetUserById",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/user/getUserById/{{user_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user",
+                "getUserById",
+                "{{user_id}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"username\": \"testdummydelete\",\r\n    \"isAdmin\": false,\r\n    \"id\": 1\r\n}"
+        }
+      ]
+    },
+    {
+      "name": "GetUsernameExists",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user/usernameExists/testdummy2",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "usernameExists",
+            "testdummy2"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetUsernameExists",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/user/usernameExists/testdummy2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user",
+                "usernameExists",
+                "testdummy2"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"exists\": false,\r\n    \"username\": \"testdummy2\"\r\n}"
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "JSESSIONID",
+      "value": ""
+    },
+    {
+      "key": "user_id_2",
+      "value": ""
+    },
+    {
+      "key": "dummy_user",
+      "value": ""
+    },
+    {
+      "key": "exercise_id_1",
+      "value": ""
+    }
+  ]
+}
